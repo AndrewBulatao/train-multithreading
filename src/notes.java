@@ -19,6 +19,6 @@ public class notes { // Time: 29:25
      *  - If train gets all locks, simulate the time it takes for the train to pass from side A to side B
      *      - Then release all locks
      *      - Also means the run method on thread is terminated
-     * 
+     * r
      */
 }
