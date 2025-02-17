@@ -4,21 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class trainHandler{
-    private ArrayList<Train> trainList = new ArrayList<>();
 
-    public boolean pathChecker(int inbound, int outbound){
-
+    public boolean trainChecker(int inbound, int outbound){
+        // TODO: CHECK BY USING THE HASH FUNCTION
 
         return true;
     }
-    // Inserting new train into the list (this wil be using theYardFile.csv)
-    public void insertTrain(String s){
+    // inserting function
+    public void insertTrain(String fleetString, String yardString){
         // Parse the string
+        String[] fleet = fleetString.split(",");
+        String[] yard = yardString.split(",");
 
         // Make the string into int. 
-        // Make a boolean that is a checker for hold or perm hold
+        // FLEET
 
 
+        // YARD
+
+        // Find where the fleet file inbound & outbound = yard are the same. Create a hash with that
+
+        // If that train number is not found in the yardfile, set switches == 0.
+        // Can also make a checker to see if the 
         // Before creating the object, check the path of train
 
 

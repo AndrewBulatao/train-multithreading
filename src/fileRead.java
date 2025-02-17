@@ -1,12 +1,12 @@
 package src;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+
 // Read in file 
 public class fileRead {
-    // FleetFile layout: train numer, inbound, outbound
-    
-    // Read this file first. This is because if this train has an impossible
-    // route, we need to put this train on the side
-    
-    // Yard File layout: inbound, switch 1, switch 2, switch 3, outbound track.
-
+    // Read both files. The trainHandler 'insertTrain should handle both files'
+    // It will return a hash array    
 }
