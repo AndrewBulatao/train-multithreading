@@ -21,7 +21,7 @@ public class fileRead {
 
         // Debugging prints out hashmap
         HashMap<Integer, List<Integer>> trainMap = handler.getTrainMap();
-        System.out.println("OUR TRAIN MAP: \n" + trainMap);
+        //System.out.println("OUR TRAIN MAP: \n" + trainMap);
     
         // Return hashmap
         return handler;

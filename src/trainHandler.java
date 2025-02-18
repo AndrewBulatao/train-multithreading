@@ -25,33 +25,35 @@ public class trainHandler{
         boolean matchFound = false;
         
         // Init switches arrayList
-        List<Integer> switches = null;
+        List<Integer> switches = new ArrayList<>();  
         // Search for the match
         for (String curYard : yardData){
-            String[] yard = curYard.split("");
+            String[] yard = curYard.split(",");
             int yardInbound = Integer.parseInt(yard[0]);
             int yardOutbound = Integer.parseInt(yard[4]);
 
             if (inboundTrack == yardInbound && outboundTrack == yardOutbound){
                 // Insert the switches in the yardFile into a hashmap with the train number
-                switches = new ArrayList<>();
+                //System.out.println("I RUNN");
                 switches.add(Integer.valueOf(yard[1]));
                 switches.add(Integer.valueOf(yard[2]));
                 switches.add(Integer.valueOf(yard[3]));
                 matchFound = true;
+                trainMap.put(trainNum, switches);
+
                 
                 break; // Stop looking
             }
         }
-        
         // We found no match
         if (!matchFound){
             switches.add(0);
             switches.add(0);
             switches.add(0);
-
+            System.out.println("NO MATCH FOUND RUNS FOR " + trainNum);
+            // Add default entry to trainMap
+            trainMap.put(trainNum, switches);
         }
-        trainMap.put(trainNum, switches);
 
     }// insertTrain end
 
