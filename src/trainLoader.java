@@ -31,6 +31,7 @@ public class trainLoader {
         return trainList;
     }
 
+    // Our get function
     public List<Train> getTrainList() {
         return trainList;
     }

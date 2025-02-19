@@ -32,7 +32,7 @@ public class yardPathLoader {
         }
     }
 
-    // get function
+    // Our get function
     public List<Integer> getSwitchSequence(int inboundTrack, int outboundTrack) {
         String key = inboundTrack + "-" + outboundTrack;
         // When returning a train that doesnt exist (ex:14) we should return a list 0,0,0
