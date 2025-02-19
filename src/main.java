@@ -5,27 +5,28 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class Driver {
+public class main {
     public static void main(String[] args) {
         PathKeyFileHandler yardHandler = new PathKeyFileHandler();
         TrainPathFileHandler fleetHandler = new TrainPathFileHandler();
 
-        yardHandler.loadYardConfig("theYardFile.csv");
-
+        // Get our switches
         List<Switch> switches = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             switches.add(new Switch(i));
         }
-
+        // Read the yard configuration file and fleet schedule file
+        yardHandler.loadYardConfig("theYardFile.csv");
         List<Train> trainList = fleetHandler.loadFleetSchedule("theFleetFile.csv", yardHandler, switches);
 
-        ExecutorService executor = Executors.newFixedThreadPool(30);
-
-        // Track train dispatch order
+        // Log the sequence of when the trains dispatch - ZERO FOR PERM HOLD
         List<Train> dispatchedTrains = Collections.synchronizedList(new ArrayList<>());
         Map<Integer, Integer> dispatchSequenceMap = new HashMap<>();
 
         System.out.println("\n\n\n$$$ TRAIN MOVEMENT SIMULATION BEGINS ................ $$$\n\n\n");
+
+        // Init executor: our max threads is 30
+        ExecutorService executor = Executors.newFixedThreadPool(30); // O
 
         // Launch train threads
         for (Train train : trainList) {
@@ -33,7 +34,7 @@ public class Driver {
             executor.execute(train);
         }
 
-        // Shutdown executor and wait for all trains to finish
+        // Shutdown executor, let other trains run
         executor.shutdown();
         try {
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
@@ -45,9 +46,10 @@ public class Driver {
         printTrainSummary(trainList, dispatchSequenceMap);
     }
 
-    // Function to print all train details in order
+    // Print method: Prints Final results
     private static void printTrainSummary(List<Train> trainList, Map<Integer, Integer> dispatchSequenceMap) {
 
+        // Sorting train list by train numer (lowest to highest)
         trainList.sort(Comparator.comparingInt(Train::getTrainID));
 
         for (Train train : trainList) {
@@ -64,14 +66,7 @@ public class Driver {
                     "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.printf(
                     "%d                      %d                   %d                  %d          %d          %d             %s          %s                 %d\n",
-                    train.getTrainID(),
-                    train.getInboundTrack(),
-                    train.getOutboundTrack(),
-                    switch1,
-                    switch2,
-                    switch3,
-                    train.isDispatched() ? "False" : "True",
-                    train.isDispatched() ? "True" : "False",
+                    train.getTrainID(), train.getInboundTrack(), train.getOutboundTrack(), switch1, switch2, switch3, train.isDispatched() ? "False" : "True", train.isDispatched() ? "True" : "False",
                     dispatchSeq);
         }
     }
