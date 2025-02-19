@@ -1,3 +1,9 @@
+/*
+ * Name: Andrew Bulatao
+ * Course: CNT 4714 Spring 2025
+ * Assignment TItle: Project 2 - Mult-threaded prgramming in java
+ * Date: February 16
+ */
 package src;
 
 import java.util.*;
