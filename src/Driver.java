@@ -70,7 +70,7 @@ public class Driver {
                     switch1,
                     switch2,
                     switch3,
-                    train.isDispatched() ? "True" : "False",
+                    train.isDispatched() ? "False" : "True",
                     train.isDispatched() ? "True" : "False",
                     dispatchSeq);
         }
