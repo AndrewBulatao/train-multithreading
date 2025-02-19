@@ -6,7 +6,7 @@ import java.util.*;
 public class trainLoader {
     private List<Train> trainList = new ArrayList<>();
 
-    public List<Train> createTrains(String filePath, PathKeyFileHandler yardHandler, List<trackSwitches> switches) {
+    public List<Train> createTrains(String filePath, PathKeyFileHandler yardHandler, List<switchSimulator> switches) {
         // Read in fleetFile
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;

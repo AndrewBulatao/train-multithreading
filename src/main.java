@@ -11,9 +11,9 @@ public class main {
         trainLoader fleetHandler = new trainLoader();
 
         // Get our switches
-        List<trackSwitches> switches = new ArrayList<>();
+        List<switchSimulator> switches = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
-            switches.add(new trackSwitches(i));
+            switches.add(new switchSimulator(i));
         }
         // Read the yard configuration file and fleet schedule file
         yardHandler.loadYardConfig("theYardFile.csv");

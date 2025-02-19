@@ -7,14 +7,14 @@ public class Train implements Runnable {
     private int trainID;
     private int inboundTrack;
     private int outboundTrack;
-    private List<trackSwitches> switches;
+    private List<switchSimulator> switches;
     private boolean dispatched = false;
     private List<Integer> requiredSwitches;
     private List<Train> dispatchedTrains;
     private Map<Integer, Integer> dispatchSequenceMap;
 
     public Train(int trainID, int inboundTrack, int outboundTrack, List<Integer> requiredSwitches,
-            List<trackSwitches> switches) {
+            List<switchSimulator> switches) {
         this.trainID = trainID;
         this.inboundTrack = inboundTrack;
         this.outboundTrack = outboundTrack;
@@ -97,7 +97,7 @@ public class Train implements Runnable {
     private boolean tryAcquireSwitches(List<Integer> requiredSwitches) {
         for (int i = 0; i < requiredSwitches.size(); i++) {
             int switchID = requiredSwitches.get(i);
-            trackSwitches sw = switches.get(switchID - 1);
+            switchSimulator sw = switches.get(switchID - 1);
             if (!sw.lockSwitch(trainID, i, requiredSwitches)) {
                 return false;
             }
@@ -107,7 +107,7 @@ public class Train implements Runnable {
 
     private void releaseSwitches(List<Integer> requiredSwitches) {
         for (int switchID : requiredSwitches) {
-            trackSwitches sw = switches.get(switchID - 1);
+            switchSimulator sw = switches.get(switchID - 1);
             sw.unlockSwitch(trainID);
             System.out.println("Train " + trainID + ": Unlocks/Releases Switch " + switchID);
         }
