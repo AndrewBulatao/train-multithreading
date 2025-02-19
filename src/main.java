@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class main {
     public static void main(String[] args) {
-        PathKeyFileHandler yardHandler = new PathKeyFileHandler();
+        yardPathLoader yardHandler = new yardPathLoader();
         trainLoader fleetHandler = new trainLoader();
 
         // Get our switches
