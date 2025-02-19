@@ -3,11 +3,11 @@ package src;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Switch {
+public class trackSwitches {
     private int switchID;
     private final ReentrantLock lock = new ReentrantLock();
 
-    public Switch(int switchID) {
+    public trackSwitches(int switchID) {
         this.switchID = switchID;
     }
 

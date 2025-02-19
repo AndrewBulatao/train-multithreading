@@ -8,16 +8,16 @@ import java.util.concurrent.TimeUnit;
 public class main {
     public static void main(String[] args) {
         PathKeyFileHandler yardHandler = new PathKeyFileHandler();
-        TrainPathFileHandler fleetHandler = new TrainPathFileHandler();
+        trainLoader fleetHandler = new trainLoader();
 
         // Get our switches
-        List<Switch> switches = new ArrayList<>();
+        List<trackSwitches> switches = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
-            switches.add(new Switch(i));
+            switches.add(new trackSwitches(i));
         }
         // Read the yard configuration file and fleet schedule file
         yardHandler.loadYardConfig("theYardFile.csv");
-        List<Train> trainList = fleetHandler.loadFleetSchedule("theFleetFile.csv", yardHandler, switches);
+        List<Train> trainList = fleetHandler.createTrains("theFleetFile.csv", yardHandler, switches);
 
         // Log the sequence of when the trains dispatch - ZERO FOR PERM HOLD
         List<Train> dispatchedTrains = Collections.synchronizedList(new ArrayList<>());
