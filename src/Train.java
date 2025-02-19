@@ -9,17 +9,16 @@ public class Train implements Runnable {
     private int outboundTrack;
     private List<switchSimulator> switches;
     private boolean dispatched = false;
-    private List<Integer> requiredSwitches;
+    private List<Integer> neededSwitches;
     private List<Train> dispatchedTrains;
     private Map<Integer, Integer> dispatchSequenceMap;
 
-    public Train(int trainID, int inboundTrack, int outboundTrack, List<Integer> requiredSwitches,
-            List<switchSimulator> switches) {
+    public Train(int trainID, int inboundTrack, int outboundTrack, List<Integer> requiredSwitches, List<switchSimulator> switches) {
         this.trainID = trainID;
         this.inboundTrack = inboundTrack;
         this.outboundTrack = outboundTrack;
         this.switches = switches;
-        this.requiredSwitches = requiredSwitches;
+        this.neededSwitches = requiredSwitches;
     }
 
     public void setDispatchTracker(List<Train> dispatchedTrains, Map<Integer, Integer> dispatchSequenceMap) {
@@ -28,16 +27,16 @@ public class Train implements Runnable {
     }
 
     @Override
-    public void run() {
-        if (requiredSwitches.isEmpty()) {
+    public void run() { // Try to get all the necessary switches for current train
+        if (neededSwitches.isEmpty()) { // If we have a nonexistent train
             System.out.println("*************");
             System.out.println("Train " + trainID + " is on permanent hold and cannot be dispatched.");
             System.out.println("*************");
             return;
         }
 
-        while (true) {
-            if (tryAcquireSwitches(requiredSwitches)) {
+        while (true) { // If we get our switches
+            if (tryAcquireSwitches(neededSwitches)) { // Try to get needed switches
                 System.out.println("Train " + trainID + ": HOLDS ALL NEEDED SWITCH LOCKS – Train movement begins.");
                 try {
                     Thread.sleep(100);
@@ -47,24 +46,24 @@ public class Train implements Runnable {
 
                 System.out.println("Train " + trainID + ": Clear of yard control.");
                 System.out.println("Train " + trainID + ": Releasing all switch locks.");
-                releaseSwitches(requiredSwitches);
+                releaseSwitches(neededSwitches);
                 System.out.println("Train " + trainID
                         + ": Has been dispatched and moves on down the line out of yard control into CTC.");
                 System.out.println("\n\n\n                            @ @ @ TRAIN " + trainID + ": DISPATCHED @ @ @");
 
                 dispatched = true;
 
-                // Add to dispatch list and assign sequence number
+                
                 synchronized (dispatchedTrains) {
                     dispatchedTrains.add(this);
                     dispatchSequenceMap.put(trainID, dispatchedTrains.size());
                 }
                 break;
-            } else {
+            } else { // If we're unable to get our switches, run method 'releaseSwitches' then try again after sleep
                 System.out.println("Train " + trainID
                         + ": Unable to acquire all needed switches. Releasing acquired locks and retrying...");
-                releaseSwitches(requiredSwitches);
-                try {
+                releaseSwitches(neededSwitches);
+                try { 
                     Thread.sleep((long) (Math.random() * 200));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -73,7 +72,7 @@ public class Train implements Runnable {
         }
     }
 
-    // Utility functions to retrieve train details
+    // GET FUNCTIONS
     public int getTrainID() {
         return trainID;
     }
@@ -86,8 +85,8 @@ public class Train implements Runnable {
         return outboundTrack;
     }
 
-    public List<Integer> getRequiredSwitches() {
-        return requiredSwitches;
+    public List<Integer> getNeededSwitches() {
+        return neededSwitches;
     }
 
     public boolean isDispatched() {

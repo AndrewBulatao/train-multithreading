@@ -54,7 +54,7 @@ public class main {
 
         for (Train train : trainList) {
             int dispatchSeq = dispatchSequenceMap.getOrDefault(train.getTrainID(), 0);
-            List<Integer> switches = train.getRequiredSwitches();
+            List<Integer> switches = train.getNeededSwitches();
 
             int switch1 = switches.size() > 0 ? switches.get(0) : 0;
             int switch2 = switches.size() > 1 ? switches.get(1) : 0;
