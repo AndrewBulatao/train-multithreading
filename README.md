@@ -40,7 +40,7 @@ The program will simulate trains being dispatched, moving along tracks, arriving
 
 ## Example Output
 
-From `simulated_run.txt`:
+From `simulated_run.txt`:<br>
 Train 1 dispatched to Track A<br>
 Train 2 dispatched to Track B<br>
 Train 1 arrived at Station X<br>
