@@ -41,12 +41,12 @@ The program will simulate trains being dispatched, moving along tracks, arriving
 ## Example Output
 
 From `simulated_run.txt`:
-Train 1 dispatched to Track A
-Train 2 dispatched to Track B
-Train 1 arrived at Station X
-Train 3 waiting for Track A
-Train 2 arrived at Station Y
-Train 3 dispatched to Track A
+Train 1 dispatched to Track A<br>
+Train 2 dispatched to Track B<br>
+Train 1 arrived at Station X<br>
+Train 3 waiting for Track A<br>
+Train 2 arrived at Station Y<br>
+Train 3 dispatched to Track A<br>
 ...
 
 
